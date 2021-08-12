@@ -12,8 +12,8 @@ def student_details(request):
     stu = Student.objects.get(id=1)
     print(stu)
     serializer = StudentSerializer(stu)
-    # print(serializer) python data
-    # print(serializer.data)
+    print(serializer) 
+    print(serializer.data)
     json_data = JSONRenderer().render(serializer.data)
     print(json_data)
     return HttpResponse(json_data, content_type='application/json')
