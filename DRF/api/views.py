@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from rest_framework.renderers import JSONRenderer
 import rest_framework
 from api.models import Student
@@ -7,9 +7,11 @@ from.models import Student
 from.serializers import StudentSerializer
 # Create your views here.
 
+# Model object - single student data
 
-def student_details(request):
-    stu = Student.objects.get(id=1)
+
+def student_details(request, pk):
+    stu = Student.objects.get(id=pk)
     print(stu)
     serializer = StudentSerializer(stu)
     # print(serializer)
@@ -17,3 +19,20 @@ def student_details(request):
     json_data = JSONRenderer().render(serializer.data)
     print(json_data)
     return HttpResponse(json_data, content_type='application/json')
+# also we can use JSONResponse for JSONdata
+    # return JsonResponse(serializer.data, safe=True)
+
+# Queryset - all student data
+
+
+def student_list(request):
+    stu = Student.objects.all()
+    print(stu)
+    serializer = StudentSerializer(stu, many=True)
+    # print(serializer)
+    # print(serializer.data)
+    json_data = JSONRenderer().render(serializer.data)
+    print(json_data)
+    return HttpResponse(json_data, content_type='application/json')
+# also we can use JSONResponse for JSONdata
+    # return JsonResponse(serializer.data, safe=False)
