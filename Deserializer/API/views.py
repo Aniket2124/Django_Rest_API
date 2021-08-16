@@ -1,3 +1,4 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render
 import io
 from rest_framework import serializers
@@ -22,5 +23,7 @@ def employee_create(request):
             res = {'msg': 'Data Created'}
             json_data = JSONRenderer().render(res)
             return HttpResponse(json_data, content_type='applicatin/json')
-        json_data = JSONRenderer().render(serializer.errors)
-        return HttpResponse(json_data, content_type='applicatin/json')
+        # also we can use one line code for these two lines by jasonresponse
+        # json_data = JSONRenderer().render(serializer.errors)
+        # return HttpResponse(json_data, content_type='applicatin/json')
+        return JsonResponse(json_data, Self=false)
