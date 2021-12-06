@@ -1,0 +1,4 @@
+/venv/
+/vnv/
+.env
+db.sqlite3
